@@ -1,0 +1,70 @@
+data:
+  input_size: [48, 36, 24]
+  img_size: 1024
+  scale: [2, 4, 8]
+test:
+  dataset:
+    downscale: false
+    mean: [0.4488, 0.4371, 0.404]
+    #mean: [0.5, 0.5, 0.5]
+    path: '/SRData_Quad/co_test'
+    stddev: [0.0039215, 0.0039215, 0.0039215]
+    #stddev: [0.5, 0.5, 0.5]
+  fast_validation: -1
+train:
+  D_lr: 0.0001
+  batch_size: 8
+  dataset:
+    downscale: false
+    mean: [0.4488, 0.4371, 0.404]
+    #mean: [0.5, 0.5, 0.5]
+    path: '/SRData_Quad_small/co'
+    stddev: [0.0039215, 0.0039215, 0.0039215]
+    #stddev: [0.5, 0.5, 0.5]
+  epochs: 100
+  gan_loss_weight: 1
+  min_epochs: 1
+  max_epochs: 2
+  io: {eval_epoch_freq: 10, print_errors_freq: 1, save_model_freq: 10, save_img_freq: 1}
+  l1_loss_weight: 0
+  lr: 0.0001
+  lr_decay: 0.5
+  # LR RATE CHANGE
+  lr_schedule_patience: 4
+  # TRAINING SHUTDOWN IF NO IMPROVEMENT
+  training_shutdown_patience: 8
+  smallest_lr: 1.0e-05
+  D_smallest_lr: 1.0e-06
+  D_lr_decay: 0.9
+  vgg_loss_weight: [0.5, 2]
+xtra:
+  img_tile_path: '/s/HOSTNAME/a/nobackup/galileo/stip-images/ALBUM/Sentinel-2/'
+  test_tile_path: '/s/chopin/b/grad/sapmitra/comb_inputs/'
+  #img_tile_path: '/s/HOSTNAME/a/nobackup/galileo/sapmitra/SRImages/SR_Dan/'
+  num_inputs: 500
+  num_tests: 50
+  num_vals: 50
+  #num_inputs: 2
+  #albums: ['co-3month','ca-3month','nv-3month']
+  albums: ['co-3month']
+  chkpt_path: '/saved_ae_dist'
+  save_path: '/saved_images_ae'
+  test_save_path: '/tested_images'
+  seed: 12
+  # DETERMINES INPUT SIZE
+  inp_img_res: 64
+  img_type: '-3.tif'
+  file_sep: '/'
+  pyramid_levels: [11,12,13]
+  benchmarks: [2.3, 3.2, 3.7]
+edge_param:
+  g1_path: '/s/HOSTNAME/a/nobackup/galileo/sapmitra/SRImages/boost_exp/'
+  save_img_freq: 300
+  print_err_freq: 100
+  gen_img: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SR_H_dash'
+  gen_img_test: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/H_dash_8_test'
+  #orig_img: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRData_original'
+  orig_img: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/train'
+  out_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/boost_exp_g2'
+  save_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/saved_images_g2'
+  test_save_path: '/s/chopin/e/proj/sustain/sapmitra/super_resolution/SRImages/tested_images_g2'
